@@ -1,3 +1,4 @@
+import 'package:cre8/components/button.dart';
 import 'package:cre8/provider/scheduleprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,19 @@ class Display extends StatelessWidget {
   Widget build(BuildContext context) {
     // Access the provider here (correct context usage)
     final scheduleProvider = Provider.of<ScheduleProvider>(context);
-
+    final items = scheduleProvider.schedulemodel.length;
+    if (items == 0) {return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Your Schedule is empty start creating", style: TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold
+        ),),
+        Button(text: "Create schedule", 
+        color: Colors.blue,
+        onPressed: (){Navigator.pushNamed(context, '/create');})
+      ],
+    );}
+    
     return ListView.builder(
       itemCount: scheduleProvider.schedulemodel.length,
       itemBuilder: (context, index) {

@@ -1,4 +1,8 @@
 
+import 'package:cre8/all_schedule.dart';
+import 'package:cre8/create_schedule.dart';
+import 'package:cre8/widgets/Auth/signin.dart';
+import 'package:cre8/widgets/Auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/scheduleprovider.dart';
@@ -34,50 +38,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Light & Dark Theme App',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: _themeMode,
-      home: HomePage(onToggle: toggleTheme, isDark: _themeMode == ThemeMode.dark),
+
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Signup(),
+        '/create': (context) => CreateSchedule(onToggle: toggleTheme, isDark: _themeMode == ThemeMode.dark),
+        '/signin': (context) => Signin(),
+        '/all': (context) => AllSchedule()
+     
+      },
     );
   }
 }
 
 
-
-class HomePage extends StatelessWidget {
-  final Function(bool) onToggle;
-  final bool isDark;
-
-  const HomePage({super.key, required this.onToggle, required this.isDark});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Theme Switch'),
-        actions: [
-          Switch(
-            value: isDark,
-            onChanged: onToggle,
-            activeColor: Colors.white,
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('This is ${isDark ? "Dark" : "Light"} Theme',
-                style: Theme.of(context).textTheme.headlineMedium),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Button'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

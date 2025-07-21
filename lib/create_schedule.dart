@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CreateSchedule extends StatefulWidget {
-  const CreateSchedule({super.key});
+  final Function(bool) onToggle;
+  final bool isDark;
+  const CreateSchedule({super.key, required this.onToggle, required this.isDark});
 
   @override
   State<CreateSchedule> createState() => _CreateScheduleState();
@@ -42,6 +44,15 @@ class _CreateScheduleState extends State<CreateSchedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Schedule", style: TextStyle(fontSize: 20),),
+        actions: [
+          Switch(
+            value: widget.isDark, 
+            onChanged: widget.onToggle,
+            activeColor: Colors.white,)
+        ],
+      ),
         
         body: Padding(
           padding: const EdgeInsets.all(50.0),
@@ -64,11 +75,13 @@ class _CreateScheduleState extends State<CreateSchedule> {
               InputField(text: "Description", controller: descController, isSecured: false),
               SizedBox(height: 20,),
               Button(text: "Submit", 
+              color: Colors.blue,
               onPressed: _sunmit),
              Button(
                 text: "View All Schedule",
+                color: Colors.white,
                 onPressed: () {
-                   Navigator.pushNamed(context, '/all');
+                   Navigator.pushNamed(context, '/');
                 },
               )
 

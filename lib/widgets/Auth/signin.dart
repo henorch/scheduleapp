@@ -1,20 +1,21 @@
 import 'package:cre8/components/button.dart';
 import 'package:cre8/components/textfield.dart';
+import 'package:cre8/utils/pageslider.dart';
+import 'package:cre8/widgets/Auth/signup.dart';
 import 'package:flutter/material.dart';
 
 
-class Signup extends StatefulWidget {
- const Signup({super.key});
+class Signin extends StatefulWidget {
+ const Signin({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<Signin> createState() => _SigninState();
  
 
   
 }
 
-class _SignupState extends State<Signup> {
-  final TextEditingController usernameController = TextEditingController();
+class _SigninState extends State<Signin> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -27,15 +28,13 @@ class _SignupState extends State<Signup> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Register", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),),
-            SizedBox(height: 10,),
-            InputField(text: "username", controller: usernameController, isSecured: false),
-             SizedBox(height: 10,),
+            Text("Login", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),),
+             SizedBox(height: 20,),
             InputField(text: "email", controller: emailController, isSecured: false),
-             SizedBox(height: 10,),
+             SizedBox(height: 20,),
             InputField(text: "password", controller: passwordController, isSecured: false),
-            SizedBox(height: 10,),
-           Button(text: "Submit", 
+             SizedBox(height: 20,),
+             Button(text: "Submit", 
              color: Colors.blue,
                 onPressed: () {
                   
@@ -43,18 +42,19 @@ class _SignupState extends State<Signup> {
                   SizedBox(height: 20,),
               Text("don't have an account?"),
                SizedBox(height: 10,),
-             Button(text: "do not have an account", 
+             Button(text: "Create an account", 
                 color: Colors.green,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/signin');
+                  Navigator.pushNamed(context, '/');
                 },),
-                 SizedBox(height: 10,),
+                 SizedBox(height: 20,),
               Text("or"),
-               SizedBox(height: 5,),
-                Button(text: "Sign up with Google", 
+               SizedBox(height: 10,),
+                Button(text: "Sign in with Google", 
                 color: Colors.red,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/');
+                  Navigator.of(context).push(
+              SlidePageRoute(page: Signup()),);
                 },),
           ],
         ),
